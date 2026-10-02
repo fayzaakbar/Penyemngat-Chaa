@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff2d9">
+  <meta name="description" content="Sedikit semangat, banyak pecel lele, khusus untuk Hasya Faza Shabirah.">
+  <title>Semangat, Hasya! | Pecel Lele Express</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --cream: #fff2d9;
+      --paper: #fffdf6;
+      --ink: #273c2d;
+      --tomato: #e55c3b;
+      --tomato-dark: #bf452f;
+      --leaf: #477b50;
+      --yellow: #f4c64e;
+      --pink: #f3a394;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--ink);
+      background-color: var(--cream);
+      background-image: radial-gradient(#dfcfae 0.75px, transparent 0.75px);
+      background-size: 18px 18px;
+      font-family: "DM Sans", sans-serif;
+    }
+
+    button { font: inherit; }
+
+    .page {
+      position: relative;
+      display: grid;
+      min-height: 100svh;
+      place-items: center;
+      padding: 34px 20px;
+      isolation: isolate;
+    }
+
+    .sunburst {
+      position: absolute;
+      z-index: -1;
+      top: 4%;
+      left: 50%;
+      width: min(74vw, 700px);
+      aspect-ratio: 1;
+      border: 1px dashed #d6bb7a;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      opacity: .7;
+    }
+
+    .sunburst::before,
+    .sunburst::after {
+      position: absolute;
+      inset: 9%;
+      border: 1px dashed #d6bb7a;
+      border-radius: 50%;
+      content: "";
+    }
+
+    .sunburst::after { inset: 18%; }
+
+    .note {
+      position: relative;
+      width: min(100%, 600px);
+      padding: 28px clamp(20px, 6vw, 54px) 34px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: 8px 8px 0 var(--ink);
+      text-align: center;
+      animation: arrive .65s both cubic-bezier(.2,.8,.2,1);
+    }
+
+    .ticket {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: #e7efd9;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .ticket::before { content: "✦"; color: var(--tomato); }
+
+    h1 {
+      margin: 16px 0 8px;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(2.4rem, 9vw, 4.6rem);
+      line-height: .98;
+      font-weight: 700;
+    }
+
+    h1 span { color: var(--tomato); }
+
+    .intro {
+      max-width: 390px;
+      margin: 0 auto;
+      color: #526154;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    .plate-scene {
+      position: relative;
+      display: grid;
+      width: min(100%, 390px);
+      height: 250px;
+      margin: 4px auto 6px;
+      place-items: center;
+      perspective: 700px;
+    }
+
+    .orbit-track {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 250px;
+      height: 190px;
+      border: 1px dashed #d6bb7a;
+      border-radius: 50%;
+      animation: orbit-spin 12s linear infinite;
+      transform: translate(-50%, -50%);
+    }
+
+    .plate {
+      position: relative;
+      display: grid;
+      width: 220px;
+      height: 172px;
+      place-items: center;
+      border: 8px solid #fff;
+      border-radius: 50%;
+      background: #f4ddb1;
+      box-shadow: 0 8px 0 #d8c59e, 0 13px 18px #273c2d24;
+      transform: rotate(-7deg);
+      animation: plate-bob 3s ease-in-out infinite, plate-shine 5s ease-in-out infinite;
+    }
+
+    .plate::before {
+      position: absolute;
+      inset: 8px;
+      border: 2px dashed #c6a86e;
+      border-radius: 50%;
+      content: "";
+    }
+
+    .meal {
+      position: relative;
+      z-index: 1;
+      font-size: 4rem;
+      filter: drop-shadow(0 3px 1px #7d613533);
+      animation: meal-wiggle 4s ease-in-out infinite;
+    }
+
+    .fish {
+      position: absolute;
+      z-index: 2;
+      font-size: 3rem;
+      filter: drop-shadow(0 5px 3px #273c2d22);
+    }
+
+    .fish-one { top: 13px; left: 7%; animation: fish-swim 3.4s ease-in-out infinite; }
+    .fish-two { right: 5%; bottom: 10px; animation: fish-swim-back 4s ease-in-out infinite .7s; }
+
+    .orbit {
+      position: absolute;
+      top: -15px;
+      left: calc(50% - 15px);
+      font-size: 1.8rem;
+      animation: twinkle 1.8s ease-in-out infinite;
+    }
+
+    .orbit-two { top: auto; bottom: -14px; left: 24%; animation-delay: .5s; }
+    .orbit-three { top: 42%; left: -13px; font-size: 1.2rem; animation-delay: 1s; }
+
+    .steam {
+      position: absolute;
+      top: 22px;
+      left: 47%;
+      color: #d99b63;
+      font-size: 1.7rem;
+      animation: steam-rise 2.3s ease-in-out infinite;
+    }
+
+    .sambal {
+      position: absolute;
+      right: 17%;
+      bottom: 22px;
+      font-size: 1.7rem;
+      animation: sauce-pop 1.8s ease-in-out infinite;
+    }
+
+    .sticker {
+      position: absolute;
+      z-index: 3;
+      padding: 6px 9px;
+      border: 1px solid var(--ink);
+      border-radius: 4px;
+      background: #e7efd9;
+      font-size: .65rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    .sticker-one { top: 26px; left: 9%; rotate: -9deg; animation: sticker-wiggle 3s ease-in-out infinite; }
+    .sticker-two { right: 7%; bottom: 23px; background: #fde2d6; rotate: 7deg; animation: sticker-wiggle 3.4s ease-in-out infinite reverse; }
+
+    .message {
+      max-width: 410px;
+      margin: 0 auto 20px;
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+
+    .message strong { color: var(--tomato-dark); }
+
+    .action {
+      display: inline-flex;
+      min-height: 52px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 21px;
+      border: 2px solid var(--ink);
+      border-radius: 5px;
+      color: white;
+      background: var(--tomato);
+      box-shadow: 0 4px 0 var(--ink);
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    .action:hover { background: var(--tomato-dark); transform: translateY(-2px); box-shadow: 0 6px 0 var(--ink); }
+    .action:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+    .action:focus-visible { outline: 3px solid var(--leaf); outline-offset: 4px; }
+
+    .letter-dialog {
+      position: fixed;
+      width: min(520px, calc(100% - 32px));
+      max-width: none;
+      max-height: min(88vh, 700px);
+      overflow: auto;
+      padding: 12px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      color: var(--ink);
+      background: var(--paper);
+      box-shadow: 9px 10px 0 #273c2d;
+    }
+
+    .letter-dialog[open] { animation: letter-enter .4s cubic-bezier(.2,.8,.2,1) both; }
+
+    .letter-dialog::backdrop {
+      background: #203127b8;
+      backdrop-filter: blur(4px);
+      animation: backdrop-enter .3s ease both;
+    }
+
+    .letter-paper {
+      position: relative;
+      padding: 30px clamp(20px, 6vw, 38px) 26px;
+      border: 1px dashed #c6a86e;
+      border-radius: 4px;
+      background: repeating-linear-gradient(180deg, transparent 0 31px, #d6bb7a33 32px);
+    }
+
+    .letter-stamp {
+      display: grid;
+      width: 54px;
+      height: 54px;
+      margin: 0 auto 12px;
+      place-items: center;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      background: #fde2d6;
+      font-size: 1.65rem;
+    }
+
+    .letter-dialog[open] .letter-stamp { animation: stamp-pop .55s .15s both cubic-bezier(.2,1.5,.4,1); }
+
+    .letter-kicker {
+      margin: 0 0 8px;
+      color: var(--tomato-dark);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .letter-paper h2 {
+      max-width: 390px;
+      margin: 0 auto 18px;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(1.65rem, 6vw, 2.25rem);
+      line-height: 1.12;
+      text-align: center;
+    }
+
+    .letter-body {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .letter-signoff {
+      margin: 18px 0 0;
+      color: var(--leaf);
+      font-weight: 700;
+      line-height: 1.6;
+      text-align: right;
+    }
+
+    .letter-close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      color: var(--ink);
+      background: var(--paper);
+      font-size: 1.35rem;
+      cursor: pointer;
+    }
+
+    .letter-close:hover { color: white; background: var(--tomato); }
+    .letter-close:focus-visible { outline: 3px solid var(--leaf); outline-offset: 3px; }
+
+    .signature {
+      margin: 19px 0 0;
+      color: #6d796d;
+      font-size: .78rem;
+    }
+
+    .signature span { color: var(--tomato); }
+
+    .floaty {
+      position: fixed;
+      z-index: 5;
+      top: var(--top);
+      left: var(--left);
+      pointer-events: none;
+      font-size: var(--size);
+      animation: burst var(--duration) cubic-bezier(.16,.75,.3,1) forwards;
+    }
+
+    @keyframes arrive {
+      from { opacity: 0; transform: translateY(18px) rotate(-1deg); }
+      to { opacity: 1; transform: translateY(0) rotate(0); }
+    }
+
+    @keyframes plate-bob {
+      0%, 100% { transform: translateY(0) rotate(-7deg); }
+      50% { transform: translateY(-8px) rotate(-4deg); }
+    }
+
+    @keyframes plate-shine {
+      0%, 100% { box-shadow: 0 8px 0 #d8c59e, 0 13px 18px #273c2d24; }
+      50% { box-shadow: 0 8px 0 #d8c59e, 0 13px 28px #e55c3b3b; }
+    }
+
+    @keyframes meal-wiggle {
+      0%, 88%, 100% { rotate: 0deg; }
+      92% { rotate: -5deg; }
+      96% { rotate: 5deg; }
+    }
+
+    @keyframes fish-swim {
+      0%, 100% { transform: translate(0, 0) rotate(-17deg); }
+      35% { transform: translate(20px, -14px) rotate(4deg); }
+      70% { transform: translate(4px, 5px) rotate(-8deg); }
+    }
+
+    @keyframes fish-swim-back {
+      0%, 100% { transform: translate(0, 0) rotate(13deg) scaleX(-1); }
+      40% { transform: translate(-18px, -17px) rotate(-3deg) scaleX(-1); }
+      75% { transform: translate(-4px, 3px) rotate(8deg) scaleX(-1); }
+    }
+
+    @keyframes orbit-spin {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes steam-rise {
+      0%, 100% { opacity: .35; transform: translateY(5px) scale(.8); }
+      50% { opacity: 1; transform: translateY(-7px) scale(1.1); }
+    }
+
+    @keyframes sauce-pop {
+      0%, 100% { transform: translateY(0) rotate(-8deg); }
+      50% { transform: translateY(-8px) rotate(8deg); }
+    }
+
+    @keyframes sticker-wiggle {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -5px; }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { scale: .8; rotate: -8deg; }
+      50% { scale: 1.15; rotate: 12deg; }
+    }
+
+    @keyframes burst {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(.5) rotate(0); }
+      100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.4) rotate(var(--spin)); }
+    }
+
+    @keyframes letter-enter {
+      from { opacity: 0; transform: translateY(22px) scale(.94) rotate(-1deg); }
+      to { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+    }
+
+    @keyframes backdrop-enter {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes stamp-pop {
+      from { opacity: 0; transform: scale(.35) rotate(-24deg); }
+      to { opacity: 1; transform: scale(1) rotate(0); }
+    }
+
+    @media (max-width: 420px) {
+      .page { padding: 23px 16px; }
+      .note { padding-top: 23px; padding-bottom: 27px; }
+      .plate-scene { height: 220px; }
+      .plate { width: 190px; height: 150px; }
+      .meal { font-size: 3.5rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="sunburst" aria-hidden="true"></div>
+    <section class="note" aria-labelledby="title">
+      <div class="ticket">Pecel Lele Express · Paket Semangat</div>
+      <h1 id="title">Semangat,<br><span>Hasya!</span></h1>
+      <p class="intro">Semoga kerjaan hari ini beres satu-satu. Kalau belum semua, nggak apa-apa: manusia bukan mesin fotokopi.</p>
+
+      <div class="plate-scene" aria-label="Seporsi pecel lele spesial dengan ikan yang sedang terbang">
+        <div class="orbit-track" aria-hidden="true">
+          <span class="orbit orbit-one">💛</span>
+          <span class="orbit orbit-two">✦</span>
+          <span class="orbit orbit-three">♥</span>
+        </div>
+        <span class="sticker sticker-one" aria-hidden="true">extra sayang</span>
+        <span class="sticker sticker-two" aria-hidden="true">fresh from hati</span>
+        <span class="steam" aria-hidden="true">〰</span>
+        <span class="fish fish-one" aria-hidden="true">🐟</span>
+        <div class="plate" aria-hidden="true"><span class="meal">🍚 🐟</span></div>
+        <span class="fish fish-two" aria-hidden="true">🐠</span>
+        <span class="sambal" aria-hidden="true">🌶️</span>
+      </div>
+
+      <p class="message"><strong>Kerjain satu-satu dulu, Hasya. Kamu bukan mesin.</strong><br>Tarik napas, minum air, lalu lanjut semampunya. Nggak harus sempurna hari ini; satu langkah kecil juga tetap kemajuan. Kalau otak mulai loading, istirahat sebentar. Aku dukung kamu, tanpa target harus selalu produktif. 😄</p>
+      <button class="action" id="cheer" type="button"><span aria-hidden="true">💌</span> Buka surat semangat</button>
+      <p class="signature">Dari seseorang yang ikut senang kalau harimu berjalan baik <span>♥</span></p>
+    </section>
+  </main>
+
+  <dialog class="letter-dialog" id="letter" aria-labelledby="letter-title" aria-describedby="letter-body">
+    <div class="letter-paper">
+      <button class="letter-close" id="close-letter" type="button" aria-label="Tutup surat">×</button>
+      <span class="letter-stamp" aria-hidden="true">💌</span>
+      <p class="letter-kicker">Surat kecil untuk Hasya</p>
+      <h2 id="letter-title">Pelan-pelan juga tetap sampai.</h2>
+      <p class="letter-body" id="letter-body">Chaa, kalau kerjaan hari ini terasa menumpuk, pilih satu hal yang paling penting lalu mulai dari situ. Kamu nggak harus menyelesaikan semuanya sekaligus, dan istirahat bukan berarti malas. Minum air, lemaskan bahu, lalu lanjut saat sudah siap. Kalau ada yang belum selesai hari ini, besok masih bisa dicicil lagi. Semoga urusanmu dimudahkan dan setelah kerja ada waktu buat makan enak. Aku ikut menyemangati kamu dari sini. 🐟</p>
+      <p class="letter-signoff">Salam hangat 💛💛💛💛💛💛💛💛💛,<br>tim pendukung NO 1 💛</p>
+    </div>
+  </dialog>
+
+  <script>
+    const cheerButton = document.querySelector("#cheer");
+    const letterDialog = document.querySelector("#letter");
+    const closeLetterButton = document.querySelector("#close-letter");
+    const confetti = ["🐟", "💛", "🌶️", "✨", "🐠"];
+
+    cheerButton.addEventListener("click", () => {
+      letterDialog.showModal();
+      const buttonBounds = cheerButton.getBoundingClientRect();
+      const originX = buttonBounds.left + buttonBounds.width / 2;
+      const originY = buttonBounds.top + buttonBounds.height / 2;
+
+      for (let index = 0; index < 24; index += 1) {
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 75 + Math.random() * 180;
+        const piece = document.createElement("span");
+        piece.className = "floaty";
+        piece.textContent = confetti[Math.floor(Math.random() * confetti.length)];
+        piece.style.setProperty("--left", `${originX}px`);
+        piece.style.setProperty("--top", `${originY}px`);
+        piece.style.setProperty("--dx", `${Math.cos(angle) * distance}px`);
+        piece.style.setProperty("--dy", `${Math.sin(angle) * distance}px`);
+        piece.style.setProperty("--spin", `${Math.random() * 300 - 150}deg`);
+        piece.style.setProperty("--size", `${18 + Math.random() * 18}px`);
+        piece.style.setProperty("--duration", `${.8 + Math.random() * .8}s`);
+        document.body.append(piece);
+        piece.addEventListener("animationend", () => piece.remove(), { once: true });
+      }
+    });
+
+    closeLetterButton.addEventListener("click", () => letterDialog.close());
+    letterDialog.addEventListener("click", (event) => {
+      if (event.target === letterDialog) letterDialog.close();
+    });
+  </script>
+</body>
+</html>
